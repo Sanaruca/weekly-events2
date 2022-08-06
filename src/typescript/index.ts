@@ -7,10 +7,10 @@ const activityComponents = activityevents.map(e => new ActivityComponent(e))
 const content = new ActivityStore()
 
 activityComponents.forEach(ac => { 
-  ac.resizeElement()
+  ac.render()
   ac.insert()
   content.add(ac)
 })
 
-
+console.log(content)
 

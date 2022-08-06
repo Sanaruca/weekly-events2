@@ -1,39 +1,5 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none
-}
-
-html {
-  font-size: 10px;
-}
-
-body{
-  font-size: 1.8rem;
-}
-
-.flex {
-  display: flex;
-
-  *{
-    flex: 1;
-  }
-}
-
-.center{
-  justify-content: center;
-  align-items: center;
-}
-
-.col {
-  flex-flow: column nowrap;
-}
-
-.grid {
-  display: grid;
-}
+@use '_reset.scss';
+@use '_utilities.scss';
 
 .Col {
   background-color: rgba(137, 43, 226, 0.466);
@@ -101,4 +67,10 @@ body{
   &:hover{
     z-index: 200;
   }
+
+  &.isActive{
+    box-shadow: #0072ff 0 0 1rem 0.5rem;
+    z-index: 200;
+  }
+
 }
