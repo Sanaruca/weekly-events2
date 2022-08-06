@@ -50,11 +50,16 @@ export class ActivityComponent implements ActivityComponentInterface {
   }
 
   generateElement(): HTMLElement {
-    const element = document.createElement('div')
-    element.classList.add('Activity')
-    element.dataset.id = this.state.id
-    element.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
-    return element
+    const activityElement = document.createElement('div')
+    activityElement.classList.add('Activity')
+    activityElement.dataset.id = this.state.id
+    activityElement.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+    
+    const resizecontrolElement = document.createElement('div')
+    resizecontrolElement.classList.add('ResizeControl', 'hide')
+
+    activityElement.appendChild(resizecontrolElement)
+    return activityElement
   }
 
 
@@ -68,8 +73,10 @@ export class ActivityComponent implements ActivityComponentInterface {
 
     if (this.editMode) {
       this.elementRef.classList.add('isActive')
+      this.elementRef.querySelector('.ResizeControl')!.classList.remove('hide')
     } else {
       this.elementRef.classList.remove('isActive')
+      this.elementRef.querySelector('.ResizeControl')!.classList.add('hide')
     }
 
   }
