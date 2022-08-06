@@ -2,11 +2,11 @@
   const weekdays = ['monday' , 'tuesday' , 'wednesday' , 'thursday' , 'friday' , 'saturday' , 'sunday'];
   const nEInH = 2;
 
-  function splitHour(hour,by){
+  function hourSeparator(hour,split){
 
-    const a = 60/by
+    const a = 60/split
 
-      return Array(by).fill('').map(((s, i)=>{
+      return Array(split).fill('').map(((s, i)=>{
         const calc = a*i
         return `${hour > 9 ? hour : '0'+hour}:${calc>9? calc: '0'+calc}`
       }))
@@ -14,7 +14,7 @@
 
 mixin Hour(hour, numberOfSpacers)
   .Hour.flex.col
-    each time in splitHour(hour, numberOfSpacers)
+    each time in hourSeparator(hour, numberOfSpacers)
       .Separator(data-time= time)
 
 doctype html
@@ -22,6 +22,6 @@ html
   head
     link(rel="stylesheet" href="/css/styles.css")
     //- script(src="/js/bundle.js")
-    script(data-main="/js/index", type="text/javascript", src="https://requirejs.org/docs/release/2.3.6/minified/require.js" defer)
+    script(data-main="/js/index" type="text/javascript" src="https://requirejs.org/docs/release/2.3.6/minified/require.js" defer)
   body
     block content 

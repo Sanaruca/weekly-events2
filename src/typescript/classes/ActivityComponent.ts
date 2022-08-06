@@ -7,10 +7,11 @@ export class ActivityComponent implements ActivityComponentInterface {
   }
 
   resizeElement(): void {
+
     const SeparatorStart = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeStart}"]`)!
     const SeparatorEnd = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeEnd}"]`)!
 
-    this.elementRef.style.height = SeparatorEnd.getBoundingClientRect().bottom - SeparatorStart.getBoundingClientRect().top + 'px'
+    this.elementRef.style.height = SeparatorEnd.getBoundingClientRect().top - SeparatorStart.getBoundingClientRect().top + 'px'
 
   }
 

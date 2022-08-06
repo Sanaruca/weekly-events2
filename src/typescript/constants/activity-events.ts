@@ -1,4 +1,4 @@
-export const activityevents : ActivityEventData[] =[
+export const activityevents : ActivityEventData[] = [
   {
     description: 'nonoe',
     timeStart: '06:00',

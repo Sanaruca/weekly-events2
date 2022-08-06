@@ -1,7 +1,8 @@
 {
   "scripts": {
     "watch:pug": "pug -w ./src/templates/index.pug --out ./build/",
-    "watch:sass": "sass ./src/scss/styles.scss ./build/css/styles.css --watch"
+    "watch:sass": "sass ./src/scss/styles.scss ./build/css/styles.css --watch",
+    "watch:ts": "tsc --watch"
   },
   "devDependencies": {
     "pug-cli": "1.0.0-alpha6",
