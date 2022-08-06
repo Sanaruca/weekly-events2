@@ -41,9 +41,10 @@ interface ActivityStoreInterface {
   add(item: ActivityComponentInterface): void
   /**
    * Makes an Activity Component in the items list change its state to editMode
-   * @param index The position of the AcrivityComponent to section
+   * @param id The ActivityComponent id
    * @returns The selected ActivityComponent
+   * @throws an Error object when the id does not match any ActivityComponent
    */
-  select(index: number):ActivityComponentInterface
+  select(id: string):ActivityComponentInterface
 }
 
