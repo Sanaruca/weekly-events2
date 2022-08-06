@@ -9,7 +9,14 @@ interface ActivityComponentInterface {
   state: ActivityEventData,
   elementRef: HTMLElement,
   editMode:boolean,
+  /**
+   * Add a time slice to the timeEnd state
+   */
   addTime(): void,
+  
+  /**
+   * Subtract a fraction of time from the state of timeEnd
+   */
   restTime(): void,
   generateElement(): HTMLElement
   /**

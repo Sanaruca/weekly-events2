@@ -1,3 +1,5 @@
+import { defaultTimes } from "../constants/data";
+
 export class ActivityComponent implements ActivityComponentInterface {
 
   public elementRef: HTMLElement;
@@ -17,11 +19,28 @@ export class ActivityComponent implements ActivityComponentInterface {
   }
 
   addTime(): void {
-
+    const nextEnd = defaultTimes[defaultTimes.indexOf(this.state.timeEnd)+1]
+    
+    // For security
+    if(!nextEnd) return
+    
+    this.state.timeEnd = nextEnd
+    this.render()
   }
-
+  
   restTime(): void {
 
+    const auxStartIndex = defaultTimes.indexOf(this.state.timeStart)
+    const auxEndIndex = defaultTimes.indexOf(this.state.timeEnd)
+
+    const nextEnd = defaultTimes[auxEndIndex-1]
+    
+    // For security
+    if(!nextEnd || auxEndIndex <=  auxStartIndex+1 ) return;
+
+    this.state.timeEnd = nextEnd
+
+    this.render()
   }
 
   toggleEdit(): boolean {
