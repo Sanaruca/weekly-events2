@@ -1,4 +1,5 @@
 interface ActivityEventData {
+  id?: string,
   description: string,
   timeStart: string,
   timeEnd: string,
@@ -6,7 +7,7 @@ interface ActivityEventData {
 }
 
 interface ActivityComponentInterface {
-  state: ActivityEventData,
+  state: Required<ActivityEventData>,
   elementRef: HTMLElement,
   editMode:boolean,
   /**

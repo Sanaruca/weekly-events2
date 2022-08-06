@@ -5,7 +5,7 @@ export class ActivityComponent implements ActivityComponentInterface {
   public elementRef: HTMLElement;
   public editMode: boolean = false;
 
-  constructor(public state: ActivityEventData) {
+  constructor(public state: Required<ActivityEventData>) {
     this.elementRef = this.generateElement()
   }
 
@@ -52,6 +52,7 @@ export class ActivityComponent implements ActivityComponentInterface {
   generateElement(): HTMLElement {
     const element = document.createElement('div')
     element.classList.add('Activity')
+    element.dataset.id = this.state.id
     element.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
     return element
   }

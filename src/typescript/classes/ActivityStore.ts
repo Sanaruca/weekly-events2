@@ -20,13 +20,16 @@ export class ActivityStore implements ActivityStoreInterface {
     // return lodash.remove(this.items, (_, i)=> i == index)[0]
   }
 
-  select(index: number): ActivityComponentInterface {
+  select(id: string): ActivityComponentInterface {
 
     for (const ac of this.items)
       if (ac.editMode) ac.toggleEdit()
 
 
-    const ac = this.items[index]
+    const ac = this.items.find(ac=> ac.state.id == id)
+
+    if (!ac) throw new Error('The provided id does not match any ActivityComponent')
+
     ac.toggleEdit()
     return ac
   }

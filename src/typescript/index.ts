@@ -3,11 +3,11 @@ import { ActivityStore } from "./classes/ActivityStore";
 import { ActivityComponent } from "./classes/ActivityComponent";
 import { defaultTimes } from "./constants/data";
 
-const activityComponents = activityevents.map(e => new ActivityComponent(e))
+const activityComponents = activityevents.map(e => new ActivityComponent({ ...e, id: Date.now().toString() }))
 
 const content = new ActivityStore()
 
-activityComponents.forEach(ac => { 
+activityComponents.forEach(ac => {
   ac.render()
   ac.insert()
   content.add(ac)
