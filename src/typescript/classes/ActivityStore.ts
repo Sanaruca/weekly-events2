@@ -1,5 +1,7 @@
 // import lodash from "lodash";
 
+import { onSeparatorMouseover } from "../utilities/event-handler-functions";
+
 export class ActivityStore implements ActivityStoreInterface {
 
   public items: ActivityComponentInterface[];
@@ -25,10 +27,19 @@ export class ActivityStore implements ActivityStoreInterface {
     for (const ac of this.items)
       if (ac.editMode) ac.toggleEdit()
 
-
-    const ac = this.items.find(ac=> ac.state.id == id)
+    const ac = this.items.find(ac => ac.state.id == id);
 
     if (!ac) throw new Error('The provided id does not match any ActivityComponent')
+    
+    // ? separator events
+    const colseparators = document.querySelectorAll<HTMLElement>(`[data-weekday="${ac.state.weekday}"] .Separator`)
+    
+    console.log({ colseparators })
+    
+    colseparators.forEach(s => {
+      s.addEventListener('mouseover', onSeparatorMouseover)
+    })
+    //------
 
     ac.toggleEdit()
     return ac

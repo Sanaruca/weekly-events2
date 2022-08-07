@@ -17,3 +17,5 @@ export function hourSeparator(hour: number, split: number): string[] {
     return `${hour > 9 ? hour : '0' + hour}:${calc > 9 ? calc : '0' + calc}`
   }))
 }
+
+
