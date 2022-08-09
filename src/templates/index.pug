@@ -1,19 +1,8 @@
 extends _layout.pug
 
 block content
-  .MainTable.grid
-    // row header 
-    .RowHeader.flex: each wd in weekdays
-      .td.flex.center= wd
-    // time
-    .TimeCol.flex.col: each _,i in Array(12)
-      +Hour(i+1, nEInH)
-      //- bad practice
-        .Separator= t
-    // week table
-    .WeekTable.flex: each wd in weekdays
-      .Col.flex.col(data-weekday=wd): each _, i in Array(12)
-        +Hour(i+1, nEInH)
-        
+  //- include ./components/main-table-component.pug
+  include ./forms/activity-event-form.pug
+
 
 

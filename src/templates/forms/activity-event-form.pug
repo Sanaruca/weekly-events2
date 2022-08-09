@@ -1,0 +1,40 @@
+
+h1 form
+form(action="javascript:void(0)" name="activityEventForm").flex.col
+  h3 weekday
+  select#weekday(name="weekday")
+    option(value="monday") monday
+    option(value="tuesday") tuesday
+    option(value="wednesday") wednesday
+    option(value="thursday") thursday
+    option(value="friday") friday
+    option(value="saturday") saturday
+    option(value="sunday") sunday
+
+  h3 starts
+  .timestart.flex
+    label(for="startHour") hour
+    select#startHour(name="startHour")
+      each _, hour in Array(12)
+        option(value=hour) #{hour.toString()}
+    label(for="minutes") minutes
+    select#startMinutes(name="startMinutes")
+      option(value="00") 00
+      option(value="30") 30
+  h3 ends
+  .timeend.flex
+    label(for="endHour") hour
+    select#endHour(name="endHour")
+      each _, hour in Array(12)
+        option(value=hour) #{hour.toString()}
+    label(for="minutes") minutes
+    select#endMinutes(name="endMinutes")
+      option(value="00") 00
+      option(value="30") 30
+  label(for="description"): h3 description
+  textarea#description(type="textarea" name="description")
+
+  input(type="submit" value="sub")
+h2 json output
+.json-content
+  textarea#json(cols="50" rows="20")

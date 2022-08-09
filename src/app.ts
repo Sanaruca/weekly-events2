@@ -1,4 +1,4 @@
 import './scss/styles.scss';
 
-import './typescript'
+import './typescript/activity-events-form-handler'
 

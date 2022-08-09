@@ -1,6 +1,11 @@
 @use '_reset.scss';
 @use '_utilities.scss';
 
+
+body{
+  padding: 8rem;
+}
+
 .Col {
   background-color: rgba(137, 43, 226, 0.466);
 }
