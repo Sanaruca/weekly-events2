@@ -14,10 +14,21 @@ export class ActivityStore implements ActivityStoreInterface {
   }
 
   remove(index: number): ActivityComponentInterface {
-    // native method
-    return this.items.splice(index, 1)[0]
     // with lodash
-    // return lodash.remove(this.items, (_, i)=> i == index)[0]
+    // lodash.remove(this.items, (_, i)=> i == index)[0]
+    // native method
+    const removedAC = this.items.splice(index, 1)[0]
+
+    removedAC.elementRef.remove()
+
+    return removedAC
+  }
+
+  removeAll(): void {
+    while (true) {
+      if (this.items.length == 0) break;
+      this.remove(0)
+    }
   }
 
   select(id: string): ActivityComponentInterface {

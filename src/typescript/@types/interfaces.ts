@@ -39,7 +39,15 @@ export  interface ActivityComponentInterface {
 
 export  interface ActivityStoreInterface {
   items: ActivityComponentInterface[]
+  /**
+   * Removes an activity component from the view and returns the removed ActivityComponent
+   * @param index the position of the Activity Component within the items property of this class
+   */
   remove(index: number) : ActivityComponentInterface,
+  /**
+   * Remove all Activity Components from the view and within the items property of this class
+   */
+  removeAll() : void,
   add(item: ActivityComponentInterface): void
   /**
    * Makes an Activity Component in the items list change its state to editMode
