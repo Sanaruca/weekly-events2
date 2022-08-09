@@ -1,4 +1,5 @@
 import { defaultTimes } from "../constants/data";
+import {ActivityComponentInterface, ActivityEventData} from "../@types"
 
 export class ActivityComponent implements ActivityComponentInterface {
 

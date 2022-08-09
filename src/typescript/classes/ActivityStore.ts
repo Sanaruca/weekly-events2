@@ -1,4 +1,4 @@
-// import lodash from "lodash";
+import { ActivityStoreInterface, ActivityComponentInterface } from "../@types";
 
 export class ActivityStore implements ActivityStoreInterface {
 
@@ -26,7 +26,7 @@ export class ActivityStore implements ActivityStoreInterface {
       if (ac.editMode) ac.toggleEdit()
 
 
-    const ac = this.items.find(ac=> ac.state.id == id)
+    const ac = this.items.find(ac => ac.state.id == id)
 
     if (!ac) throw new Error('The provided id does not match any ActivityComponent')
 

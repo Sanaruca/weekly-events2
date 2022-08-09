@@ -1,3 +1,5 @@
+import { ActivityEventData } from "../@types";
+
 export const activityevents : ActivityEventData[] = [
   {
     description: 'nonoe',

@@ -1,4 +1,6 @@
-interface ActivityEventData {
+import { Weekday } from ".";
+
+export  interface ActivityEventData {
   id?: string,
   description: string,
   timeStart: string,
@@ -6,7 +8,7 @@ interface ActivityEventData {
   weekday: Weekday
 }
 
-interface ActivityComponentInterface {
+export  interface ActivityComponentInterface {
   state: Required<ActivityEventData>,
   elementRef: HTMLElement,
   editMode:boolean,
@@ -35,7 +37,7 @@ interface ActivityComponentInterface {
   toggleEdit(): boolean,
 }
 
-interface ActivityStoreInterface {
+export  interface ActivityStoreInterface {
   items: ActivityComponentInterface[]
   remove(index: number) : ActivityComponentInterface,
   add(item: ActivityComponentInterface): void
