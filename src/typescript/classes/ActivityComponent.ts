@@ -1,52 +1,47 @@
 import { defaultTimes } from "../constants/data";
-import {ActivityComponentInterface, ActivityEventData} from "../@types"
+import { ActivityComponentInterface, ActivityEventData, Weekday } from "../@types"
 import { BehaviorSubject } from "rxjs";
 
 export class ActivityComponent implements ActivityComponentInterface {
 
   public elementRef: HTMLElement;
   public editMode: boolean = false;
-  public state$: BehaviorSubject<Required<ActivityEventData>>; 
+  public state$: BehaviorSubject<Required<ActivityEventData>>;
 
   constructor(initialState: Required<ActivityEventData>) {
     this.state$ = new BehaviorSubject(initialState)
-    this.elementRef = this.generateElement()
+    this.elementRef = this.#generateElement()
   }
 
-  
+
   public get state() {
     return this.state$.value
   }
 
-  #resizeElement(): void {
-
-    const SeparatorStart = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeStart}"]`)!
-    const SeparatorEnd = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeEnd}"]`)!
-
-    this.elementRef.style.height = SeparatorEnd.getBoundingClientRect().top - SeparatorStart.getBoundingClientRect().top + 'px'
-
+  changeWeekday(weekday: Weekday): void {
+    this.state$.next({ ...this.state, weekday })
   }
 
   addTime(): void {
-    const nextEnd = defaultTimes[defaultTimes.indexOf(this.state.timeEnd)+1]
-    
+    const nextEnd = defaultTimes[defaultTimes.indexOf(this.state.timeEnd) + 1]
+
     // For security
-    if(!nextEnd) return
-    
-    this.state$.next({...this.state, timeEnd: nextEnd})
+    if (!nextEnd) return
+
+    this.state$.next({ ...this.state, timeEnd: nextEnd })
   }
-  
+
   restTime(): void {
-    
+
     const auxStartIndex = defaultTimes.indexOf(this.state.timeStart)
     const auxEndIndex = defaultTimes.indexOf(this.state.timeEnd)
-    
-    const nextEnd = defaultTimes[auxEndIndex-1]
-    
+
+    const nextEnd = defaultTimes[auxEndIndex - 1]
+
     // For security
-    if(!nextEnd || auxEndIndex <=  auxStartIndex+1 ) return;
-    
-    this.state$.next({...this.state, timeEnd: nextEnd})
+    if (!nextEnd || auxEndIndex <= auxStartIndex + 1) return;
+
+    this.state$.next({ ...this.state, timeEnd: nextEnd })
 
   }
 
@@ -56,21 +51,13 @@ export class ActivityComponent implements ActivityComponentInterface {
     return this.editMode
   }
 
-  generateElement(): HTMLElement {
-    const element = document.createElement('div')
-    element.classList.add('Activity')
-    element.dataset.id = this.state.id
-    element.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
-    return element
-  }
-
-
   insert(): void {
     const parentElement = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeStart}"]`)!
     parentElement.appendChild(this.elementRef)
   }
 
   render() {
+    this.insert()
     this.#resizeElement()
 
     if (this.editMode) {
@@ -78,6 +65,23 @@ export class ActivityComponent implements ActivityComponentInterface {
     } else {
       this.elementRef.classList.remove('isActive')
     }
+
+  }
+
+  #generateElement(): HTMLElement {
+    const element = document.createElement('div')
+    element.classList.add('Activity')
+    element.dataset.id = this.state.id
+    element.style.backgroundColor = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`
+    return element
+  }
+
+  #resizeElement(): void {
+
+    const SeparatorStart = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeStart}"]`)!
+    const SeparatorEnd = document.querySelector(`.Col[data-weekday="${this.state.weekday}"] .Separator[data-time="${this.state.timeEnd}"]`)!
+
+    this.elementRef.style.height = SeparatorEnd.getBoundingClientRect().top - SeparatorStart.getBoundingClientRect().top + 'px'
 
   }
 }

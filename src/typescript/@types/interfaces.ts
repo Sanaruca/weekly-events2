@@ -14,6 +14,12 @@ export interface ActivityComponentInterface {
   state$: BehaviorSubject<ActivityComponentInterface['state']>,
   elementRef: HTMLElement,
   editMode: boolean,
+
+  /**
+   * change the state of the weekday
+   * @param weekday
+   */
+  changeWeekday(weekday: Weekday): void,
   /**
    * Add a time slice to the timeEnd state
    */
@@ -23,7 +29,6 @@ export interface ActivityComponentInterface {
    * Subtract a fraction of time from the state of timeEnd
    */
   restTime(): void,
-  generateElement(): HTMLElement
   /**
    * Inserts the component (elementRef) inside the corresponding Separator
    */
@@ -50,7 +55,11 @@ export interface ActivityStoreInterface {
    * Remove all Activity Components from the view and within the items property of this class
    */
   removeAll(): void,
-  add(item: ActivityComponentInterface): void
+  /**
+   * Add an ActivityComponent to the view
+   * @param data the ActivityEvent data
+   */
+  add(...data: ActivityEventData[]): void
   /**
    * Makes an Activity Component in the items list change its state to editMode
    * @param id The ActivityComponent id

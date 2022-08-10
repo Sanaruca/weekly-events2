@@ -1,4 +1,5 @@
-import { ActivityStoreInterface, ActivityComponentInterface } from "../@types";
+import { ActivityStoreInterface, ActivityComponentInterface, ActivityEventData } from "../@types";
+import { ActivityComponent } from "./ActivityComponent";
 
 export class ActivityStore implements ActivityStoreInterface {
 
@@ -9,18 +10,16 @@ export class ActivityStore implements ActivityStoreInterface {
   }
 
 
-  add(...item: ActivityComponentInterface[]): void {
+  add(...data: ActivityEventData[]): void {
 
-    for (const ac of item) {
+    for (const state of data) {
+
+      const ac = new ActivityComponent({ id: state.id || Math.random().toString(), ...state })
+
+      ac.state$.subscribe(() => ac.render())
 
       this.items.push(ac)
-      ac.insert()
-      ac.state$.subscribe(() => {
-        ac.render()
-      })
     }
-
-
 
   }
 
