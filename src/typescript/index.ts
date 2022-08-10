@@ -1,16 +1,11 @@
 import { activityevents } from "./constants/activity-events";
 import { ActivityStore } from "./classes/ActivityStore";
 import { ActivityComponent } from "./classes/ActivityComponent";
-import { defaultTimes } from "./constants/data";
 
-const activityComponents = activityevents.map(e => new ActivityComponent({ ...e, id: Date.now().toString() }))
+const activityComponents = activityevents.map(e => new ActivityComponent({ ...e, id: Math.random().toString() }))
 
-const content = new ActivityStore()
+const activityStore = new ActivityStore()
 
-activityComponents.forEach(ac => {
-  ac.render()
-  ac.insert()
-  content.add(ac)
-})
+activityStore.add(...activityComponents);
 
-console.log(content)
+(window as any).activityStore = activityStore

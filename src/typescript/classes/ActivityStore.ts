@@ -9,8 +9,19 @@ export class ActivityStore implements ActivityStoreInterface {
   }
 
 
-  add(item: ActivityComponentInterface): void {
-    this.items.push(item)
+  add(...item: ActivityComponentInterface[]): void {
+
+    for (const ac of item) {
+
+      this.items.push(ac)
+      ac.insert()
+      ac.state$.subscribe(() => {
+        ac.render()
+      })
+    }
+
+
+
   }
 
   remove(index: number): ActivityComponentInterface {

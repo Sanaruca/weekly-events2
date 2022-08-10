@@ -1,13 +1,21 @@
 import { defaultTimes } from "../constants/data";
 import {ActivityComponentInterface, ActivityEventData} from "../@types"
+import { BehaviorSubject } from "rxjs";
 
 export class ActivityComponent implements ActivityComponentInterface {
 
   public elementRef: HTMLElement;
   public editMode: boolean = false;
+  public state$: BehaviorSubject<Required<ActivityEventData>>; 
 
-  constructor(public state: Required<ActivityEventData>) {
+  constructor(initialState: Required<ActivityEventData>) {
+    this.state$ = new BehaviorSubject(initialState)
     this.elementRef = this.generateElement()
+  }
+
+  
+  public get state() {
+    return this.state$.value
   }
 
   #resizeElement(): void {
@@ -25,23 +33,21 @@ export class ActivityComponent implements ActivityComponentInterface {
     // For security
     if(!nextEnd) return
     
-    this.state.timeEnd = nextEnd
-    this.render()
+    this.state$.next({...this.state, timeEnd: nextEnd})
   }
   
   restTime(): void {
-
+    
     const auxStartIndex = defaultTimes.indexOf(this.state.timeStart)
     const auxEndIndex = defaultTimes.indexOf(this.state.timeEnd)
-
+    
     const nextEnd = defaultTimes[auxEndIndex-1]
     
     // For security
     if(!nextEnd || auxEndIndex <=  auxStartIndex+1 ) return;
+    
+    this.state$.next({...this.state, timeEnd: nextEnd})
 
-    this.state.timeEnd = nextEnd
-
-    this.render()
   }
 
   toggleEdit(): boolean {

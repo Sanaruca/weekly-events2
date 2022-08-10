@@ -1,6 +1,7 @@
+import { BehaviorSubject } from "rxjs";
 import { Weekday } from ".";
 
-export  interface ActivityEventData {
+export interface ActivityEventData {
   id?: string,
   description: string,
   timeStart: string,
@@ -8,15 +9,16 @@ export  interface ActivityEventData {
   weekday: Weekday
 }
 
-export  interface ActivityComponentInterface {
-  state: Required<ActivityEventData>,
+export interface ActivityComponentInterface {
+  get state(): Required<ActivityEventData>
+  state$: BehaviorSubject<ActivityComponentInterface['state']>,
   elementRef: HTMLElement,
-  editMode:boolean,
+  editMode: boolean,
   /**
    * Add a time slice to the timeEnd state
    */
   addTime(): void,
-  
+
   /**
    * Subtract a fraction of time from the state of timeEnd
    */
@@ -37,17 +39,17 @@ export  interface ActivityComponentInterface {
   toggleEdit(): boolean,
 }
 
-export  interface ActivityStoreInterface {
+export interface ActivityStoreInterface {
   items: ActivityComponentInterface[]
   /**
    * Removes an activity component from the view and returns the removed ActivityComponent
    * @param index the position of the Activity Component within the items property of this class
    */
-  remove(index: number) : ActivityComponentInterface,
+  remove(index: number): ActivityComponentInterface,
   /**
    * Remove all Activity Components from the view and within the items property of this class
    */
-  removeAll() : void,
+  removeAll(): void,
   add(item: ActivityComponentInterface): void
   /**
    * Makes an Activity Component in the items list change its state to editMode
@@ -55,6 +57,6 @@ export  interface ActivityStoreInterface {
    * @returns The selected ActivityComponent
    * @throws an Error object when the id does not match any ActivityComponent
    */
-  select(id: string):ActivityComponentInterface
+  select(id: string): ActivityComponentInterface
 }
 
