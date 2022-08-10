@@ -48,9 +48,9 @@ export interface ActivityStoreInterface {
   items: ActivityComponentInterface[]
   /**
    * Removes an activity component from the view and returns the removed ActivityComponent
-   * @param index the position of the Activity Component within the items property of this class
+   * @param id the id of the Activity Component to be removed
    */
-  remove(index: number): ActivityComponentInterface,
+  remove(id: string): ActivityComponentInterface,
   /**
    * Remove all Activity Components from the view and within the items property of this class
    */

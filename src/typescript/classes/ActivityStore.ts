@@ -23,11 +23,13 @@ export class ActivityStore implements ActivityStoreInterface {
 
   }
 
-  remove(index: number): ActivityComponentInterface {
+  remove(id: string): ActivityComponentInterface {
     // with lodash
     // lodash.remove(this.items, (_, i)=> i == index)[0]
     // native method
-    const removedAC = this.items.splice(index, 1)[0]
+    const removedAC = this.select(id)
+
+    this.items.splice(this.items.indexOf(removedAC), 1)
 
     removedAC.elementRef.remove()
 
@@ -35,10 +37,7 @@ export class ActivityStore implements ActivityStoreInterface {
   }
 
   removeAll(): void {
-    while (true) {
-      if (this.items.length == 0) break;
-      this.remove(0)
-    }
+    this.items.map(({ state }) => state.id).forEach((id) => this.remove(id))
   }
 
   select(id: string): ActivityComponentInterface {
